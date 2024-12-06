@@ -18,7 +18,7 @@ func getNextName() string {
 	checkError(err)
 	var dirs []int
 	for _, e := range entries {
-		if e.IsDir() {
+		if e.IsDir() && strings.Contains(e.Name(), "day") {
 			daynumber, err := strconv.Atoi(e.Name()[len(e.Name())-2:])
 			checkError(err)
 			dirs = append(dirs, daynumber)
@@ -39,7 +39,7 @@ func createEmptyFile(filename string) error {
 	d := []byte("")
 	if strings.Contains(filename, "main.go") {
 		var contents strings.Builder
-		contents.WriteString("package main\n\nimport(\n)\n\nfunc main(){\n\n}")
+		contents.WriteString("package main\n\nimport(\n\t\"os\"\n\t\"fmt\"\n\taoc2024helper \"github.com/reneichhorn/aoc2024Helper\"\n)\n\nfunc main(){\n\targs := os.Args\n\tfilename, err := aoc2024helper.ParseArgs(args)\n\tdata, err := os.ReadFile(filename)\n\taoc2024helper.CheckError(err)\n\tfmt.Println(q1(string(data)))\n\tfmt.Println(q2(string(data)))\n}\n\nfunc q1(input string) int {\n\tsum := 0\n\treturn sum\n}\n\nfunc q2(input string) int {\n\tsum := 0\n\treturn sum\n}")
 		d = []byte(contents.String())
 	}
 	return os.WriteFile(filename, d, 0644)

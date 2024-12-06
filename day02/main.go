@@ -12,13 +12,13 @@ import (
 func parseArgs(args []string) (string, error) {
 	if len(args) < 2 {
 		fmt.Println("No input file provided")
-		fmt.Println("Usage: go run %s `inputfile`", args[0])
-		return "", errors.New("No input file provided")
+		fmt.Printf("Usage: go run %s `inputfile`\n", args[0])
+		return "", errors.New("no input file provided")
 	}
 	if len(args) != 2 {
 		fmt.Println("Illegal number of arguments provided")
-		fmt.Println("Usage: go run %s `inputfile`", args[1])
-		return "", errors.New("Illegal number of arguments provided")
+		fmt.Printf("Usage: go run %s `inputfile`\n", args[1])
+		return "", errors.New("illegal number of arguments provided")
 
 	}
 	return args[1], nil
@@ -143,10 +143,10 @@ func q2(input string) int {
 		isSafe := false
 		isSafe = isLineSafe(sline)
 		if !isSafe {
-			for i, _ := range sline {
+			for i := range sline {
 				newIndex := 0
 				newLine := make([]int, len(sline)-1)
-				for j, _ := range sline {
+				for j := range sline {
 					if i != j {
 						newLine[newIndex] = sline[j]
 						newIndex++
